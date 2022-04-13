@@ -2,15 +2,16 @@ import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 
-export default function Profile(){
+export default function Profile({id}){
     const router = useRouter()
     const [user, setUser] = useState({})
     useEffect(()=>{
-      axios.get(`http://localhost:5000/api/user/profile/${router.query.id}`)
+      alert.get('>>' + id)
+      axios.get(`http://localhost:5000/api/user/profile/${id}`)
       .then(res=>{
         setUser(res.data.user)
       }).catch(err=>{
-         
+         console.log(err)
       })
     },[])
     

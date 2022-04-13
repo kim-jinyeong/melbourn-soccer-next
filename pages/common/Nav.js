@@ -11,15 +11,16 @@ export default function Nav(){
                 <li className={styles.li}><Link href='/basic/calc'>Calc</Link></li>
                 <li className={styles.li}><Link href='/basic/counter'>Count</Link></li>
                 <li className={styles.li}><Link href='/basic/bmi'>Bmi</Link></li>
-                <li className={styles.li}><Link href='/board/board-list'>Board List</Link></li>
-                <li className={styles.li}><Link href='/board/board-form'>Board Form</Link></li>
-                <li className={styles.li}><Link href='/admin/dashboard'>DashBoard</Link></li>
-                <li className={styles.li}> <Link href='/game/game-list'>GameList</Link> </li>
-                <li className={styles.li}> <Link href='/game/team-list'>TeamList</Link> </li>
-                <li className={styles.li}> <Link href='/todo/todo-list'>TodoList</Link> </li>
-                <li className={styles.li}><Link href='/user/sign-in'>SignIn</Link></li>
-                <li className={styles.li}><Link href='/user/sign-up'>SignUp</Link></li>
-                <li className={styles.li}><Link href='/user/user-list'>SignList</Link></li>
+                <li className={styles.li}><Link href='/board/board-list'>게시글목록</Link></li>
+                <li className={styles.li}><Link href='/board/board'>게시글등록</Link></li>
+                <li className={styles.li}><Link href='/admin/dashboard'>대쉬보드</Link></li>
+                <li className={styles.li}> <Link href='/game/game-list'>게임목록</Link> </li>
+                <li className={styles.li}> <Link href='/game/team-list'>팀목록</Link> </li>
+                <li className={styles.li}> <Link href='/todo/todo'>스케줄등록</Link> </li>
+                <li className={styles.li}> <Link href='/todo/todo-list'>스케줄목록</Link> </li>
+                <li className={styles.li}><Link href='/user/join'>회원가입</Link></li>
+                <li className={styles.li}><Link href='/user/login'>로그인</Link></li>
+                <li className={styles.li}><Link href='/user/user-list'>사용자리스트</Link></li>
             </ul>
         </nav>
     );
