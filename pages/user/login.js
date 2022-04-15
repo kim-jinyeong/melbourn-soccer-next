@@ -86,9 +86,7 @@ export default function Login3Page() {
                 style={{ margin: "10px" }}
                 name="loginForm"
                 noValidate
-                onSubmit={handleSubmit(async (data) => {
-                  await dispatch(loginRequest(data));
-                })}
+                onSubmit={handleSubmit(async (data) => {await dispatch(loginRequest(data));})}
               >
                 <Controller
                   name="username"

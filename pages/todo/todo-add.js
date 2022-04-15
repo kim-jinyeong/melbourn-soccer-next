@@ -1,33 +1,39 @@
+import { Checkbox } from "antd";
 import React,{ useState} from "react";
 import { useDispatch } from "react-redux";
-import { addTask } from '../../redux/reducers/todoReducer.ts'
+import { todoActions } from "../../redux/reducers/todoReducer.ts";
 
 export default function AddTodo() {
-  const [value, setValue] = useState('')
+  const [todo, setValue] = useState({
+    userid:'', task:''
+  })
   const dispatch = useDispatch()
+  const handleChange = e =>{
+    e.preventDefault()
+    const{name, value} = e.target;
+    setValue({...todo,[name]: value})
+}
+
 return (
    <div className="todoapp stack-large">
     <h1>일정등록</h1>
     <form onSubmit={ e => {
         e.preventDefault()
-        alert('value ?'+value)
-        if(value) dispatch(addTask({task: value}))
+        alert("진행 1 : 일정추가 클릭");
+        dispatch(todoActions.addRequest(todo))
+        setValue({
+          userid:'', task:''
+        })
     }}>
-      
-      <input
-        type="text"
-        id="new-todo-input"
-        className="input input__lg"
-        name="text"
-        autoComplete="off"
-        onChange={ e => {
-            e.preventDefault()
-              setValue(e.target.value)
-        }}
-      />
-      <button type="submit" style={{marginLeft:"20px"}}  className="btn btn__primary btn__lg">
-        Add
-      </button>
+
+    <label><b>사용자ID</b></label>
+    <input type="text" name="userid" onChange={handleChange}/><br/>
+
+    <label><b>해야할 일</b></label>
+    <input type="text" name="task" onChange={handleChange}/><br/>
+
+    <button type="submit">일정 추가</button>
+  
     </form>
     {/**<div className="filters btn-group stack-exception">
       <button type="button" className="btn toggle-btn" aria-pressed="true">
