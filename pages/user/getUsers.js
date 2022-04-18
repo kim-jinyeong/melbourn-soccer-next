@@ -7,28 +7,27 @@ const Table = ({ columns, colspan, data}) => {
     return (
       <table className={style.table}>
         <thead>
-            <tr className={style.tr}  >
+            <tr   >
             {columns.map((column, index) => (
-                  <th className={style.td} key={index}>{column}</th>
+                  <th key={index}>{column}</th>
             ))}
           </tr>
         </thead>
         <tbody>
-                { data.length == 0  ?<tr className={style.tr}>
-                                      <td colSpan={colspan} className={style.td}>데이터가 없습니다</td>
+                { data.length == 0  ?<tr >
+                                      <td colSpan={colspan} >데이터가 없습니다</td>
                                       </tr>
                 :data.map((user) => (
-                <tr className={style.tr}  key={user.username} >
-                  <td className={style.td}>
+                <tr key={user.username} >
+                  <td >
                     <Link href={{pathname:`/user/[username]`,
                                 query:{selectedUser: 'test'}}} as={`/user/${user.username}`}>
-                      <a>{user.username}</a>
+                      <a>{user.userid}</a>
                     </Link>
-                    
                   </td>
-                  <td className={style.td}>{user.password}</td>
-                  <td className={style.td}>{user.name}</td>
-                  <td className={style.td}>{user.telephone}</td>
+                  <td>{user.password}</td>
+                  <td>{user.name}</td>
+                  <td>{user.phone}</td>
                 </tr>
             ))}
             
@@ -38,7 +37,7 @@ const Table = ({ columns, colspan, data}) => {
   }
   
 export default function UserList(){
-    const columns = ["Username", "Password", "Name", "Telephone"];
+    const columns = ["Userid", "Password", "Name", "Telephone"];
     const [data, setData] = useState([])
 
     const proxy = 'http://localhost:5000'
@@ -51,7 +50,7 @@ export default function UserList(){
 
     return(<>
         <h1>사용자 목록</h1>  
-        <div className={style.td}>
+        <div >
         <Table columns={columns} colspan={columns.length} data={data}/>
         </div>
         </>)

@@ -18,7 +18,7 @@ interface TodoAddSuccessType{
     }
 }
 
-function* add(todo: TodoAddtype){
+function* addTodo(todo: TodoAddtype){
     try{
         alert(' 진행 3 : saga 내부 add 성공 ' + JSON.stringify(todo))
         const response : TodoAddSuccessType = yield postTodo(todo.payload)
@@ -29,5 +29,5 @@ function* add(todo: TodoAddtype){
     }
 }
 export function* watchAdd(){
-    yield takeLatest(todoActions.addRequest, add)
+    yield takeLatest(todoActions.addRequest, addTodo)
 }
