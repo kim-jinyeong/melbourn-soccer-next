@@ -1,50 +1,63 @@
-import React, { useState } from 'react' 
-import axios from 'axios';
+import React, { useState } from "react";
+import tableStyles from '../common/style/table.module.css'
+export default function Calc() {
+    const [inputs, setInputs] = useState({opcode: "+"})
+    const [result, setResult] = useState(``)
+    const { num1, num2, opcode} = inputs
 
-export default function Calc(){
-    const proxy = 'http://localhost:5000'
-    const [inputs, setInputs] = useState({})    
-    const handleChange = e =>{
+    const onChange = (e) => {
         e.preventDefault()
-        const{value, name} = e.target;
-        setInputs({ ...inputs, [name] : value})
+        const { value, name } = e.target
+        setInputs({...inputs, [name]: value})
     }
-    const handleSubmit = e =>{
+
+    const onClick = async (e) => {
         e.preventDefault()
-        axios.post(proxy + '/api/basic/calc', inputs)
-        .then(res => {
-            const calc = res.data
-            document.getElementById('result-span').innerHTML = `
-            <h3>숫자 1 : ${calc.num1}</h3>
-            <h3>숫자 2 : ${calc.num2}</h3>
-            <h3>연산자 : ${calc.opcode}</h3>
-            `
-        })
-        .catch(err => alert(err))
+        switch (opcode){
+            case "+" :
+                return setResult(Number(num1) + Number(num2))
+            case "-" :
+                return setResult(Number(num1) - Number(num2))
+            case "*" :
+                return setResult(Number(num1) * Number(num2))
+            case "/" :
+                return setResult(Number(num1) / Number(num2))
+            case "%" :
+                return setResult(Number(num1) % Number(num2))
+            default :
+                console.log("Default")
         }
-    
-        return <>
-        <form action= "" onSubmit={handleSubmit}>
-        <h1>Calc폼</h1>
-        
-        <label htmlFor = ""><b>Num1</b></label>
-        <input type = "text" name = "num1" onChange={handleChange} /><br />
-    
-        <select htmlFor = "" name = "opcode" onChange={handleChange} >
-        <option value = "">선택</option>    
-        <option value = "+">+</option>
-        <option value = "-">-</option>
-        <option value = "*">*</option>
-        <option value = "/">/</option>
-        <option value = "%">%</option>
-        </select>
-        <br/>
-        
-        <label htmlFor = ""><b>Num2</b></label>
-        <input type = "text" name = "num2" onChange={handleChange} /><br />
-        
-        <input type ="submit" value="계산하기"/><br/>
-        </form>
-        <div> 결과 : <span id="result-span"></span></div>
-        </>
     }
+
+    return (<form >
+        <table className={tableStyles.table}>
+            <thead>
+                <tr>
+                    <th><h2>계산기</h2></th>
+                </tr>
+            </thead>
+            <tbody>
+        <tr >
+        <td>
+            <label htmlFor="">num1</label>
+            <input name="num1" type="text" onChange={onChange} /> <br/>
+
+            <label htmlFor="">연산자</label>
+            <select name="opcode" onChange={onChange} >
+                <option value="+">+</option>
+                <option value="-">-</option>
+                <option value="*">*</option>
+                <option value="/">/</option>
+                <option value="%">%</option>
+            </select><br/>
+
+            <label htmlFor="">num2</label>
+            <input name="num2" type="text" onChange={onChange} /><br />
+
+            <button onClick={onClick}>계산하기</button></td>
+            </tr>
+            <tr><td>결과 : {result}</td></tr>
+                </tbody>
+            </table>
+        </form>)
+}
